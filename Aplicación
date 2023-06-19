@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  
+  <title>Control de Rendimiento Academico</title>
+  <link rel="stylesheet" href="https://unpkg.com/bootstrap/dist/css/bootstrap.min.css">
+</head>
+<body>
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/react/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone/babel.min.js"></script>
+
+  <script type="text/babel">
+    
+    class RendimientoAcademico extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {
+          materias: [],
+        };
+      }
+
+      componentDidMount() {
+        setTimeout(() => {
+          const datosMaterias = [
+            { id: 1, nombre: 'Matemáticas', calificacion: 95 },
+            { id: 2, nombre: 'Ciencias', calificacion: 85 },
+            { id: 3, nombre: 'Historia', calificacion: 92 },
+            { id: 4, nombre: 'Inglés', calificacion: 78 },
+          ];
+          this.setState({ materias: datosMaterias });
+        }, 1000);
+      }
+
+      render() {
+        const { materias } = this.state;
+
+        if (materias.length === 0) {
+          return <p>Cargando datos...</p>;
+        }
+
+        return (
+          <div>
+            <h1>Rendimiento Académico</h1>
+            <table className="table">
+              <thead>
+                <tr>
+                  <th>Materia</th>
+                  <th>Calificación</th>
+                </tr>
+              </thead>
+              <tbody>
+                {materias.map((materia) => (
+                  <tr key={materia.id}>
+                    <td>{materia.nombre}</td>
+                    <td>{materia.calificacion}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        );
+      }
+    }
+
+    
+    ReactDOM.render(<RendimientoAcademico />, document.getElementById('root'));
+  </script>
+</body>
+</html>
